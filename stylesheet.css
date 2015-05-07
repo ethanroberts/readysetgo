@@ -1,6 +1,7 @@
 body {
 	margin: 0;
 	text-align: center;
+	font-family: Arial;
 }
 
 .homeTile {	
@@ -31,7 +32,7 @@ body {
 	font-size: 2em;
 }
 
-#homeBanner {
+.banner {
 	display: inline-block;
 	background: black;
 	color: white;
@@ -40,7 +41,7 @@ body {
 	margin-bottom: 15px;
 }
 
-#homeBanner h1 {
+.banner h1 {
 	font-family: Arial;
 	line-height: 100%;
 	text-align: center;
@@ -62,4 +63,58 @@ body {
 
 .thirdRowTiles {
 	width: 25vw;
+}
+
+#footer_FindStop {
+	display: inline-block;
+	background: black;
+	color: yellow;
+	height: 10vh;
+	width: 100vw;
+	margin-top: 15px;
+}
+
+#footer_FindStop h1 {
+	padding-left: 5vw;
+	font-family: Arial;
+	line-height: 100%;
+	text-align: left;
+	word-spacing: 50px;
+	font-size: 3em;
+}
+
+#stopInfoText_FindStop {
+	margin-left: 5vw;
+	text-align: left;
+	font-size: 2em;
+}
+
+#stopInfoIcons_FindStop {
+
+}
+
+.smallIcon_FindStop {
+	display: inline-table;
+	text-align: center;
+	width: 50px;
+	height: 50px;
+	background-color: green;
+}
+
+.smallIcon_FindStop p {
+	line-height: 100%;
+	color: white;
+}
+
+#map_FindStop {
+	display: block;
+	margin: auto;
+	margin-top: 15px;
+	background-color: #d3d3d3;
+	width: 90vw;
+	height: 50vh;
+}
+
+#inputBar_FindStop {
+	font-size: 2em;
 }

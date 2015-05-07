@@ -109,6 +109,10 @@ a:active {
 	font-size: 2em;
 }
 
+#stopName_FindStop {
+	color: blue;
+}
+
 #stopInfoIcons_FindStop {
 
 }

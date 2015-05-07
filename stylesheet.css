@@ -1,0 +1,62 @@
+body {
+	margin: 0;
+	text-align: center;
+}
+
+.homeTile {	
+	margin: 10px;
+	border-radius: 10px;
+	border-color: black;
+	border-style: solid;
+	height: 26vh;
+	display: inline-block;
+	background: #d3d3d3;
+}
+
+.tileImg {
+	height: 80%;
+}
+
+.tileFooter {
+	background: #919191;
+	border-radius: 10px;
+	height: 20%;
+}
+
+.tileFooter p {
+	display: inline-block;
+	font-family: arial;
+	text-align: center;
+	line-height: 100%;
+}
+
+#homeBanner {
+	display: inline-block;
+	background: black;
+	color: white;
+	height: 10vh;
+	width: 100vw;
+}
+
+#homeBanner h1 {
+	font-family: Arial;
+	line-height: 100%;
+	text-align: center;
+	word-spacing: 50px;
+}
+
+.titleEmphasis {
+	color: yellow;
+}
+
+.topRowTiles {
+	width: 85vw;
+}
+
+.secondRowTiles {
+	width: 40vw;
+}
+
+.thirdRowTiles {
+	width: 25vw;
+}

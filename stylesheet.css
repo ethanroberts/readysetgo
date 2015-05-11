@@ -103,6 +103,18 @@ a:active {
 	font-size: 3em;
 }
 
+#footer_FindStop  a {
+	color: yellow;
+}
+
+#footer_FindStop  a:visited {
+	color: yellow;
+}
+
+#footer_FindStop  a:hover {
+	color: yellow;
+}
+
 #stopInfoText_FindStop {
 	margin-left: 5vw;
 	text-align: left;

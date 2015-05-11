@@ -52,7 +52,7 @@ a:active {
 	font-size: 2em;
 }
 
-.banner {
+.pageBanner {
 	display: inline-block;
 	background: black;
 	color: white;
@@ -61,7 +61,7 @@ a:active {
 	margin-bottom: 15px;
 }
 
-.banner h1 {
+.pageBanner h1 {
 	font-family: Arial;
 	line-height: 100%;
 	text-align: center;
@@ -85,7 +85,7 @@ a:active {
 	width: 25vw;
 }
 
-#footer_FindStop {
+.pageFooter {
 	display: inline-block;
 	background: black;
 	color: yellow;
@@ -94,7 +94,7 @@ a:active {
 	margin-top: 15px;
 }
 
-#footer_FindStop h1 {
+.pageFooter h1 {
 	padding-left: 5vw;
 	font-family: Arial;
 	line-height: 100%;
@@ -103,15 +103,15 @@ a:active {
 	font-size: 3em;
 }
 
-#footer_FindStop  a {
+.pageFooter  a {
 	color: yellow;
 }
 
-#footer_FindStop  a:visited {
+.pageFooter  a:visited {
 	color: yellow;
 }
 
-#footer_FindStop  a:hover {
+.pageFooter  a:hover {
 	color: yellow;
 }
 

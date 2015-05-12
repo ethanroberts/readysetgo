@@ -1,28 +1,18 @@
-body {
-	margin: 0;
-	text-align: center;
-	font-family: Arial;
-}
+body {margin: 0;text-align: center;font-family: Arial;}
 
-a {
-	text-decoration: none;
-	color: black;
-}
+a {text-decoration: none;color: black;}
 
-a:visited {
-	text-decoration: none;
-	color: black;
-}
+a:visited {text-decoration: none;color: black;}
 
-a:hover {
-	text-decoration: none;
-	color: black;
-}
+a:hover {text-decoration: none;	color: black;}
 
-a:active {
-	text-decoration: none;
-	color: black;
-}
+a:active {text-decoration: none;color: black;}
+
+.pageFooter  a {color: yellow;}
+
+.pageFooter  a:visited {color: yellow;}
+
+.pageFooter  a:hover {color: yellow;}
 
 .homeTile {	
 	margin: 10px;
@@ -34,23 +24,11 @@ a:active {
 	background: #d3d3d3;
 }
 
-.tileImg {
-	height: 80%;
-}
+.tileImg {height: 80%;}
 
-.tileFooter {
-	background: #919191;
-	border-radius: 10px;
-	height: 20%;
-}
+.tileFooter {background: #919191;border-radius: 10px;height: 20%;}
 
-.tileFooter p {
-	display: inline-block;
-	font-family: arial;
-	text-align: center;
-	line-height: 100%;
-	font-size: 2em;
-}
+.tileFooter p {display: inline-block;font-family: arial;text-align: center;line-height: 100%;font-size: 2em;}
 
 .pageBanner {
 	display: inline-block;
@@ -69,21 +47,13 @@ a:active {
 	font-size: 4em;
 }
 
-.titleEmphasis {
-	color: yellow;
-}
+.titleEmphasis {color: yellow;}
 
-.topRowTiles {
-	width: 85vw;
-}
+.topRowTiles {width: 85vw;}
 
-.secondRowTiles {
-	width: 40vw;
-}
+.secondRowTiles {width: 40vw;}
 
-.thirdRowTiles {
-	width: 25vw;
-}
+.thirdRowTiles {width: 25vw;}
 
 .pageFooter {
 	display: inline-block;
@@ -103,31 +73,13 @@ a:active {
 	font-size: 3em;
 }
 
-.pageFooter  a {
-	color: yellow;
-}
-
-.pageFooter  a:visited {
-	color: yellow;
-}
-
-.pageFooter  a:hover {
-	color: yellow;
-}
-
 #stopInfoText_FindStop {
 	margin-left: 5vw;
 	text-align: left;
 	font-size: 2em;
 }
 
-#stopName_FindStop {
-	color: blue;
-}
-
-#stopInfoIcons_FindStop {
-
-}
+#stopName_FindStop {color: blue;}
 
 .smallIcon_FindStop {
 	display: inline-table;
@@ -138,6 +90,7 @@ a:active {
 }
 
 .smallIcon_FindStop p {
+	vertical-align: middle;
 	line-height: 100%;
 	color: white;
 }
@@ -151,6 +104,4 @@ a:active {
 	height: 50vh;
 }
 
-#inputBar_FindStop {
-	font-size: 2em;
-}
+#inputBar_FindStop {font-size: 2em;}

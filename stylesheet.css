@@ -104,4 +104,19 @@ a:active {text-decoration: none;color: black;}
 	height: 50vh;
 }
 
+#map_Wrapper {
+    position: relative;
+    padding-bottom: 57.5%; 
+    padding-top: 25px;
+    height: 0;
+}
+
+#map_Wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
 #inputBar_FindStop {font-size: 2em;}

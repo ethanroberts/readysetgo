@@ -21,7 +21,11 @@
 			</form>
 		</div>
 
-		<div id="map_FindStop"></div>
+		<div id="map_FindStop">
+            <div id="map_Wrapper">
+                <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/view?zoom=13&center=-41.2865%2C174.7762&key=AIzaSyAVS1HAjFhQwv6YS-CKA-l0BoBi5TNzMqw"></iframe> 
+            </div>
+        </div>
 
 		<div id="stopInfo_FindStop">
 			<div id="stopInfoText_FindStop">
@@ -29,14 +33,28 @@
 				<p>Details about stop location here</p>
 			</div>
 			<div id="stopInfoIcons_FindStop">
-				<div class="smallIcon_FindStop"><p>3</p></div>
-				<div class="smallIcon_FindStop"><p>18</p></div>
-				<div class="smallIcon_FindStop"><p>21</p></div>
+				<div class="smallIcon_FindStop" id="fs3"><p>3</p></div>
+				<div class="smallIcon_FindStop" id="fs18"><p>18</p></div>
+				<div class="smallIcon_FindStop" id="fs21"><p>21</p></div>
 			</div>
 		</div>
 
 		<div class="pageFooter" id="footer_findStop">
 			<h1><a href="index.html">GO >></a></h1>
 		</div>
+        
+        <script type="text/javascript">
+            document.getElementById('fs3').onclick = function() {
+                alert("fs3 button was clicked");
+            };
+            
+            document.getElementById('fs18').onclick = function() {
+                alert("fs18 button was clicked");
+            };
+            
+            document.getElementById('fs21').onclick = function() {
+                alert("fs21 button was clicked");
+            };
+        </script>
 	</body>
 </html>

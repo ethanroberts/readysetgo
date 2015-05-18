@@ -16,19 +16,48 @@
 	<body>
 		<div class="navbar navbar-inverse navbar-static-top">
 			<div class="container">
-				<a href="#" class="navbar-brand">Find a Stop</a>
+				<a href="#" class="navbar-brand">Find a <span class="titleEmphasis">Stop</span></a>
 			</div>
 		</div>
 
-		<div id="inputBar_FindStop">
-			<form>
-			<button id="useLocation">Use my Location</button>
-			<input type="text" placeholder="Enter Location">
-			</form>
+		<!-- Location Input -->
+		<div class="container">
+			<div class="input-group">
+				<input type="text" class="form-control" placeholder="Enter Location">
+				<span class="input-group-btn">
+					<button class="btn btn-default" type="button">Use Location</button>
+				</span>
+			</div>
 		</div>
 
-		<div id="map_FindStop"></div>
+		<!-- Map (Google Maps) -->
+		<div class="container">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<!-- Embeded Google Map -->
+					<div class="embed-responsive embed-responsive-4by3">
+						<iframe class="embed-responsive-item" src="https://www.google.com/maps/embed/v1/place?q=Te%20Aro%2C%20Wellington%2C%20New%20Zealand&key=AIzaSyA-02CDhuOT5nAyGGhq7Cg9Lob5EJDw9ag"></iframe>
+					</div>
+				</div>
+			</div>
+		</div>
 
+		<!-- Stop Information -->
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-6">
+					<h1>Stop Information</h1>
+					<p>Information about the stop would go here.</p>
+					<!-- Bus Route Numbers -->
+					<span class="label label-warning">11</span>
+					<span class="label label-warning">17</span>
+					<span class="label label-danger">42</span>
+					<span class="label label-success">52</span>
+					<span class="label label-success">57</span>
+				</div>
+			</div>
+		</div>
+		<!--
 		<div id="stopInfo_FindStop">
 			<div id="stopInfoText_FindStop">
 				<p>Nearest stop is <span id="stopName_FindStop">StopName</span></p>
@@ -41,11 +70,13 @@
 			</div>
 		</div>
 
+		-->
+
 		<!-- Footer -->
 		<div class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<a href="index.html">
-					<p class="navbar-text">GO >></p>
+					<p class="navbar-text"><span class="titleEmphasis">GO >></span></p>
 				</a>
 			</div>
 		</div>

@@ -6,7 +6,7 @@
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Ready Set Go | Home</title>
+		<title>Ready Set Go | Find A Stop</title>
 
 		<!-- CSS -->
 		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
@@ -25,22 +25,25 @@
 			<div class="input-group">
 				<input type="text" class="form-control" placeholder="Enter Location">
 				<span class="input-group-btn">
-					<button class="btn btn-default" type="button">Use Location</button>
+					<button class="btn btn-default" id="useLocation" type="button">Use Location</button>
 				</span>
 			</div>
 		</div>
 
 		<!-- Map (Google Maps) -->
-		<div class="container">
+		<!--<div class="container">
 			<div class="panel panel-default">
 				<div class="panel-body">
-					<!-- Embeded Google Map -->
-					<div class="embed-responsive embed-responsive-4by3">
-						<iframe class="embed-responsive-item" src="https://www.google.com/maps/embed/v1/place?q=Te%20Aro%2C%20Wellington%2C%20New%20Zealand&key=AIzaSyA-02CDhuOT5nAyGGhq7Cg9Lob5EJDw9ag"></iframe>
-					</div>
+<!--					 Embeded Google Map -->
+					<!--<div class="embed-responsive embed-responsive-4by3">-->
+                        <div id="findStopMap">
+                            <div class="ui-content" id="map-canvas"></div>
+<!--						<iframe class="embed-responsive-item" src="https://www.google.com/maps/embed/v1/place?q=Te%20Aro%2C%20Wellington%2C%20New%20Zealand&key=AIzaSyA-02CDhuOT5nAyGGhq7Cg9Lob5EJDw9ag"></iframe>-->
+                       </div>
+					<!-- </div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<!-- Stop Information -->
 		<div class="container finalContent">
@@ -49,11 +52,11 @@
 					<h1>Stop Information</h1>
 					<p>Information about the stop would go here.</p>
 					<!-- Bus Route Numbers -->
-					<span class="label label-warning">11</span>
-					<span class="label label-warning">17</span>
-					<span class="label label-danger">42</span>
-					<span class="label label-success">52</span>
-					<span class="label label-success">57</span>
+					<button class="label-warning" id="b11">11</button>
+					<button class="label-warning" id="b17">17</button>
+					<button class="label-warning" id="b42">42</button>
+					<button class="label-warning" id="b52">52</button>
+					<button class="label-warning" id="b57">57</button>
 				</div>
 			</div>
 		</div>
@@ -70,5 +73,83 @@
 		<!-- JS -->
 		<script src="js/jquery-1.11.3.min.js"></script>
 		<script src="bootstrap/js/bootstrap.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js"></script>
+      
+        <script type="text/javascript">        
+            $(document).ready(function() {
+                // Helper function to deal with button events.
+                $("button").click(function(event) {
+                    switch(event.target.id){
+                        case "useLocation":
+                            useLocation();
+                            break;
+                        case "b11":
+                            drawPath(11);
+                            break;
+                        case "b17":
+                            drawPath(17);
+                            break;
+                        case "b42":
+                            drawPath(42);
+                            break;
+                        case "b52":
+                            drawPath(52);
+                            break;
+                        case "b57":
+                            drawPath(57);
+                            break;
+                        default:
+                            alert("No button ID found for: "+event.target.id);
+                    }
+                });
+
+                // For the use location button, will centre map on the current position
+                function useLocation(){
+                    if(navigator.geolocation){                            
+                        navigator.geolocation.getCurrentPosition (function (pos) {
+                            var lat = pos.coords.latitude;
+                            var lng = pos.coords.longitude;
+                            //alert("Lat: "+lat+" Long: " + lng);
+                            
+                            map.setCenter(new google.maps.LatLng(lat, lng));
+                            
+                        }, function(){
+                            noGeoloaction(true);   
+                        }, {maximumAge: 500000, enableHighAccuracy:true, timeout: 6000});
+                    };
+                };
+
+                // What to do if geolocation isn't available
+                function noGeolocation(geoError){
+                      if(geoError){
+                          alert("Geolocation servive failed");
+                      } else {
+                          alert("Browser/device doesn't support geolocation");
+                      }
+
+                    //TODO: Set a default pos of map when no geolocation.
+                };
+
+                // Used for drawing the given route numbers path
+                function drawPath(routeNumber){
+                    // Check which route # to draw - remove others?
+                    // Get route information & iterate over into array?
+                    // Draw on map.
+                };
+                
+                
+                // ******* Map initialisation ******
+                var map;
+                function initialise() {
+                    var mapOptions = {
+                        zoom: 14,
+                        center: new google.maps.LatLng(-41.3, 174.783),
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                }
+                google.maps.event.addDomListener(window, 'load', initialise);
+            });
+        </script>
 	</body>
 </html>

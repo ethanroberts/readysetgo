@@ -1,4 +1,13 @@
-body{background-color: #a3a3a3;}
+html {
+    height: 100%;
+}
+
+body {
+    background-color: #a3a3a3;
+    height:100%;
+    margin: 0;
+    padding: 0;
+}
 
 .homeTiles {
 	text-align: center;
@@ -10,4 +19,16 @@ body{background-color: #a3a3a3;}
 
 .finalContent {
 	margin-bottom: 60px;
+}
+
+#findStopMap {
+    height: 65%;
+    width: 95%;
+    margin: 5% auto;
+}
+
+#map-canvas {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
 }

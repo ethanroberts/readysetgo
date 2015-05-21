@@ -1,12 +1,13 @@
 {
   "name": "ReadySetGo",
   "version": "0.0.1",
-  "description": "A Node.js app using Express 4 to help children to use public trandport in Wellington",
+  "description": "A Node.js app using Express 4 to help children to use public transport in Wellington",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "dependencies": {
+    "pg": "4.x",
     "express": "~4.9.x"
   },
   "engines": {

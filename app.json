@@ -1,0 +1,7 @@
+{
+  "name": "ReadySetGo",
+  "description": "A Node.js app using Express 4 to help children to use public transport in Wellington",
+  "repository": "https://github.com/kr1t1c4l/readysetgo.git",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "Metlink", "bus", "timetable"]
+}

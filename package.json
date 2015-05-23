@@ -1,0 +1,26 @@
+{
+  "name": "ReadySetGo",
+  "version": "0.0.1",
+  "description": "A Node.js app using Express 4 to help children to use public transport in Wellington",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "pg": "4.x",
+    "express": "~4.9.x"
+  },
+  "engines": {
+    "node": "0.12.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kr1t1c4l/readysetgo.git"
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ],
+  "license": "MIT"
+}

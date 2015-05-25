@@ -26,6 +26,10 @@ body {
 	margin-bottom: 60px;
 }
 
+.pageContainer {
+    height: 100vh;
+}
+
 #findStopMap {
     height: 65%;
     width: 95%;

@@ -13,6 +13,10 @@ body {
 	text-align: center;
 }
 
+.navbar-inverse .container p {
+    color: white;
+}
+
 .titleEmphasis {
 	color: yellow;
 }

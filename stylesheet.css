@@ -22,14 +22,6 @@ body {
 	color: yellow;
 }
 
-.finalContent {
-	margin-bottom: 60px;
-}
-
-.pageContainer {
-    height: 100vh;
-}
-
 #findStopMap {
     height: 65%;
     width: 95%;
@@ -40,4 +32,8 @@ body {
     height: 100%;
     width: 100%;
     margin: 0px;
+}
+
+.finalContent {
+    margin-bottom: 60px;
 }

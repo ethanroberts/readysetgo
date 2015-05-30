@@ -12,9 +12,10 @@ app.get('/', function(req, res) {
   res.sendfile('index.html', {root: __dirname })
 });
 
-app.get('/stops/750', function (request, response) {
+app.get('/stops/:id', function (request, response) {
+  console.log('Call for id ', request.params.id);
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      client.query('SELECT stoptimes.trip_id, stop_sequence, arrival_time,stoptimes.stop_id, stop_code, stop_name, stop_desc, stop_lat, stop_lon FROM stoptimes INNER JOIN stops ON stops.stop_id = stoptimes.stop_id WHERE stoptimes.trip_id = 750;', function(err, result) {
+      client.query('SELECT stoptimes.trip_id, stop_sequence, arrival_time,stoptimes.stop_id, stop_code, stop_name, stop_desc, stop_lat, stop_lon FROM stoptimes INNER JOIN stops ON stops.stop_id = stoptimes.stop_id WHERE stoptimes.trip_id = ?;',request.params.id , function(err, result) {
         done();
         if (err)
           { console.error(err); response.send("Error " + err); }

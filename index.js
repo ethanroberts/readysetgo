@@ -14,10 +14,9 @@ app.get('/', function(req, res) {
 
 app.get('/stops/:id', function (request, response) {
   console.log('Call for id ', request.params.id);
-  var trip = request.params.id;
-  var sql = 'SELECT stoptimes.trip_id, stop_sequence, arrival_time,stoptimes.stop_id, stop_code, stop_name, stop_desc, stop_lat, stop_lon FROM stoptimes INNER JOIN stops ON stops.stop_id = stoptimes.stop_id WHERE stoptimes.trip_id = (?);'
+  var sql = "SELECT stoptimes.trip_id, stop_sequence, arrival_time,stoptimes.stop_id, stop_code, stop_name, stop_desc, stop_lat, stop_lon FROM stoptimes INNER JOIN stops ON stops.stop_id = stoptimes.stop_id WHERE stoptimes.trip_id ="+request.params.id+";"
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      client.query(sql,[trip],function(err, result) {
+      client.query(sql,function(err, result) {
         done();
         if (err)
           { console.error(err); response.send("Error " + err); }

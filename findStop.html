@@ -24,7 +24,7 @@
 		<!-- Location Input -->
 		<div class="container" id="location-input">
 			<div class="input-group">                
-				<input type="text" class="form-control" placeholder="Enter Desintation">
+				<input type="text" id="destination" class="form-control" placeholder="Enter Desintation">
 				<span class="input-group-btn">
 					<button class="btn btn-default" id="search" type="button">Find closest stop</button>
 				</span>
@@ -77,11 +77,14 @@
         <script src="https://maps-api-ssl.google.com/maps/api/js"></script>
       
         <script type="text/javascript">        
+            var lat, lng; // Latitude and Longitude of the user
+            
             $(document).ready(function() {
                 // Helper function to deal with button events.
                 $("button").click(function(event) {
                     switch(event.target.id){
                         case "search":
+                            search();
                             break;
                         case "useFromLocation":
                             break;
@@ -98,19 +101,38 @@
                             drawPath(52);
                             break;
                         case "b57":
-                            drawPath(57);
+                            drawPath(57);                            
                             break;
                         default:
                             alert("No button ID found for: "+event.target.id);
                     }
                 });
 
-                // For the use location button, will centre map on the current position
+                // Searches for the suitable bus stop to get on and off at
+                function search(){
+//                    if(typeof lat != "undefined" || typeof lng != "undefined"){
+                        var destLat, destLng;                        
+                        var address = document.getElementById("destination").value;
+                        
+                        codeAddress(address, function(result) {
+                            //TODO remove previous markers
+                            markers[0] = ( marker = new google.maps.Marker({
+                                  position: result,
+                                  map: map,
+                                  title: 'Destination'
+                            }));
+                        });
+//                    } else {
+//                        alert("Please enter a destination");   
+//                    }
+                };
+                
+                // Centres map on users location once the map is created
                 function useLocation(){
                     if(navigator.geolocation){                            
                         navigator.geolocation.getCurrentPosition (function (pos) {
-                            var lat = pos.coords.latitude;
-                            var lng = pos.coords.longitude;
+                            lat = pos.coords.latitude;
+                            lng = pos.coords.longitude;
                             //alert("Lat: "+lat+" Long: " + lng);
                             
                             map.setCenter(new google.maps.LatLng(lat, lng));
@@ -147,13 +169,39 @@
                 // Used for drawing the given route numbers path
                 function drawPath(routeNumber){
                     // Check which route # to draw - remove others?
-                    // Get route information & iterate over into array?
-                    // Draw on map.
+                    var url = "https://ready-set-go.herokuapp.com/path/"+routeNumber;
+                    $.get(url, function(rawPath) {
+//                        console.log(rawPath);
+                        var pathData = [];
+                        
+                        // Get route information & iterate over into array?
+                        for (var i = 0; i < rawPath.length; i++){                            
+                            // Draw on map.
+                            pathData[i] = new google.maps.LatLng(rawPath[i].shape_pt_lat, rawPath[i].shape_pt_lon);
+                            var busPath = new google.maps.Polyline({
+                                path: pathData 
+                            });
+                            busPath.setMap(map);
+                        }
+                    }, 'json');
                 };
                 
-                
+                // Turns the input into a geolocation
+                // inputid is the users entered string
+                function codeAddress(inputAddress, callback) {
+                    geocoder.geocode( { 'address': inputAddress}, function(results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            callback( results[0].geometry.location);
+                        } else {
+                            alert("Geocode was not successful for the following reason: " + status);
+                        }
+                    });
+                }
+
                 // ******* Map initialisation ******
                 var map;
+                var geocoder;
+                var markers = [];
                 function initialise() {
                     var mapOptions = {
                         zoom: 14,
@@ -167,6 +215,7 @@
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
                     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                    geocoder = new google.maps.Geocoder();
                 }
                 
                 google.maps.event.addDomListener(window, 'load', initialise);

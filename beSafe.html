@@ -36,7 +36,12 @@
 			<div class="row"> <!-- Second Row -->
 				<div class="col-xs-12">
 					<div class="thumbnail">
-						<img src="images/safe01.png" onclick='this.src="images/safe01.gif"'>
+					<div style="position: relative; overflow:hidden;">
+					<img src="images/safeBus.png" style ="position: absolute; width:120%; z-index: 5; left: -120%;" class = "pickUpBus">
+					<img src="images/safe01.png" onclick='this.src="images/safe01a.png"' style="position: absolute; z-index: 2; width:100%;" class = "pickUp2">
+					<img src="images/safe01b.png" style =" width:100%;" class = "pickUp">
+					
+					</div>
 						<h4>Stand back from the road and wait till the bus has stopped before getting on/ off</h4>
 					</div>
 				</div>
@@ -74,5 +79,22 @@
 		<!-- JS -->
 		<script src="js/jquery-1.11.3.min.js"></script>
 		<script src="bootstrap/js/bootstrap.js"></script>
+
+		<script type="text/javascript">
+		$(document).ready(function(){
+
+		$(".pickUp2").click(function(){
+		$(".pickUpBus").css("left", "-120%");
+			$(".pickUpBus").animate({left: (15)+"%"}, 1500).delay(300);
+			$(this).delay(1500).fadeOut();
+			$(".pickUpBus").animate({left: (100)+"%"}, 1500);
+		});
+		$(".pickUp").click(function(){
+			$(".pickUp2").fadeIn();
+		});
+		
+		});
+		
+		</script>
 	</body>
 </html>

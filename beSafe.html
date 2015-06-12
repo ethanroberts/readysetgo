@@ -50,9 +50,12 @@
 			<div class="row"> <!-- Third Row -->
 				<div class="col-xs-12">
 					<div class="thumbnail">
-						<img src="images/safe02a.png" style ="position: absolute;">
-						<img src="images/safe02.png">
+						<div style="position: relative; overflow:hidden;">
+						<img src="images/safe02a.png" style ="position: absolute; width:100%; z-index: 2;" class = "runOver">
+						<img src="images/safe02b.png" style ="position: absolute; width:70%; z-index: 1;" class = "runOverBus">
+						<img src="images/safe02.png" style =" width:100%;">
 						<h4>Never run across the road</h4>
+					</div>
 					</div>
 				</div>
 			</div>
@@ -84,6 +87,8 @@
 		<script type="text/javascript">
 		$(document).ready(function(){
 
+
+//Bus picking up the kids
 		$(".pickUp2").click(function(){
 		$(".pickUpBus").css("left", "-120%");
 			$(".pickUpBus").animate({left: (15)+"%"}, 1500).delay(300);
@@ -98,6 +103,12 @@
 		
 		});
 		
+//Bus running over the kid
+		$(".runOver").click(function(){
+			$(".runOverBus").animate({width: "100%"},400);
+		});
+
+
 		});
 		
 		</script>

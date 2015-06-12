@@ -90,7 +90,11 @@
 			$(".pickUpBus").animate({left: (100)+"%"}, 1500);
 		});
 		$(".pickUp").click(function(){
-			$(".pickUp2").fadeIn();
+			$(".pickUpBus").css("left", "-120%");
+			$(".pickUpBus").animate({left: (15)+"%"}, 1500).delay(300);
+			$(".pickUp2").delay(1500).fadeIn();
+			$(".pickUpBus").animate({left: (100)+"%"}, 1500);
+		
 		});
 		
 		});

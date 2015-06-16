@@ -31,20 +31,10 @@
 			</div>
 		</div>
 
-		<!-- Map (Google Maps) -->
-		<!--<div class="container">
-			<div class="panel panel-default">
-				<div class="panel-body">
-<!--					 Embeded Google Map -->
-					<!--<div class="embed-responsive embed-responsive-4by3">-->
-                        <div id="findStopMap">
-                            <div class="ui-content" id="map-canvas"></div>
-<!--						<iframe class="embed-responsive-item" src="https://www.google.com/maps/embed/v1/place?q=Te%20Aro%2C%20Wellington%2C%20New%20Zealand&key=AIzaSyA-02CDhuOT5nAyGGhq7Cg9Lob5EJDw9ag"></iframe>-->
-                       </div>
-					<!-- </div>
-				</div>
-			</div>
-		</div> -->
+        <!-- Map -->
+        <div id="findStopMap">
+            <div class="ui-content" id="map-canvas"></div>
+        </div>
 
 		<!-- Stop Information -->
 		<div class="container finalContent">
@@ -76,7 +66,9 @@
 		<script src="bootstrap/js/bootstrap.js"></script>
         <script src="https://maps-api-ssl.google.com/maps/api/js"></script>
       
-        <script type="text/javascript">        
+        <script type="text/javascript">
+            // TODO Make into a separate file
+            
             var lat, lng; // Latitude and Longitude of the user
             
             $(document).ready(function() {
@@ -108,14 +100,19 @@
                     }
                 });
 
-                // Searches for the suitable bus stop to get on and off at
+                /**
+                 * Searches for the suitable bus stop to get on and off at
+                 */
                 function search(){
+                    // TODO Make search work basic brute force version
+                    // TODO Checks to make sure input is valid
+                    // TODO Move map so that everything is in the view
 //                    if(typeof lat != "undefined" || typeof lng != "undefined"){
                         var destLat, destLng;                        
                         var address = document.getElementById("destination").value;
                         
                         codeAddress(address, function(result) {
-                            //TODO remove previous markers
+                            // TODO remove previous markers
                             markers[0] = ( marker = new google.maps.Marker({
                                   position: result,
                                   map: map,
@@ -127,8 +124,12 @@
 //                    }
                 };
                 
-                // Centres map on users location once the map is created
+                /**
+                 * Centres map on users location once the map is created
+                 */
                 function useLocation(){
+                    // TODO add a marker for user
+                    // TODO keep moving map to keep user centred
                     if(navigator.geolocation){                            
                         navigator.geolocation.getCurrentPosition (function (pos) {
                             lat = pos.coords.latitude;
@@ -143,10 +144,12 @@
                     };
                 };
 
-                // What to do if geolocation isn't available
+                /**
+                 * What to do if geolocation isn't available
+                 */
                 function noGeolocation(geoError){
                     if(geoError){
-                        //alert("Geolocation service failed");
+                        alert("Geolocation service failed");
                     } else {
                         alert("Browser/device doesn't support geolocation");
                     }
@@ -154,9 +157,10 @@
                     addInputLocation();
                 };
                 
-                // Used to add the from dialogue box when geolocation isn't available
+                /**
+                 * Adds the dialogue box for a user to enter their position when geolocation isn't available
+                 */
                 function addInputLocation(){
-                    //Check it hasn't already been added
                     if(document.getElementById("from-input") == null){
                         var fromInput = document.createElement("div");
                         fromInput.setAttribute("id", "from-input");
@@ -166,17 +170,17 @@
                     } 
                 }
                 
-                // Used for drawing the given route numbers path
+                /**
+                 * Draws the given route number's path onto the map
+                 */
                 function drawPath(routeNumber){
-                    // Check which route # to draw - remove others?
+                    //TODO remove previous paths from the map
                     var url = "https://ready-set-go.herokuapp.com/path/"+routeNumber;
                     $.get(url, function(rawPath) {
-//                        console.log(rawPath);
                         var pathData = [];
                         
-                        // Get route information & iterate over into array?
-                        for (var i = 0; i < rawPath.length; i++){                            
-                            // Draw on map.
+                        // Get route information & iterate over into array
+                        for (var i = 0; i < rawPath.length; i++){
                             pathData[i] = new google.maps.LatLng(rawPath[i].shape_pt_lat, rawPath[i].shape_pt_lon);
                             var busPath = new google.maps.Polyline({
                                 path: pathData 
@@ -186,9 +190,13 @@
                     }, 'json');
                 };
                 
-                // Turns the input into a geolocation
-                // inputid is the users entered string
+                /** 
+                 * Turns the inputAddress into a geolocation
+                 * inputid is the users entered string
+                 */
                 function codeAddress(inputAddress, callback) {
+                    // TODO Create a preference/focus for Wellington area
+                    // TODO Create a better dialogue box for failure
                     geocoder.geocode( { 'address': inputAddress}, function(results, status) {
                         if (status == google.maps.GeocoderStatus.OK) {
                             callback( results[0].geometry.location);

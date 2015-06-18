@@ -2,7 +2,7 @@
 // TODO Dynamic stop info
 // TODO Map styling - remove locations only core roads
 // TODO Auto draw bus routes on map, instead of buttons? Or make button handler for any button?
-            
+
 //Users most up to date location and their destination location
 var locations = {
     userLat:"", 
@@ -12,6 +12,7 @@ var locations = {
 }; 
 
 var watcher;
+var busPath;
 
 $(document).ready(function() {
     // Helper function to deal with button events.
@@ -22,9 +23,8 @@ $(document).ready(function() {
                 break;
             case "useFromLocation":
                 break;
-            case "b11":               
-                console.log(locations);
-//                drawPath(11);
+            case "b11":
+                drawPath(11);
                 break;
             case "b17":
                 drawPath(17);
@@ -51,7 +51,6 @@ $(document).ready(function() {
         // TODO Checks to make sure input is valid
         // TODO Move map so that everything is in the view
         // TODO remove previous markers
-
                                 
         var address = document.getElementById("destination").value;
 
@@ -60,10 +59,10 @@ $(document).ready(function() {
             locations.destLat = result.A;
             locations.destLng = result.F;
             
-//            var url = "https://ready-set-go.herokuapp.com/search/"+locations;
-//            $.get(url, function(rawPath) {   
-//            
-//            }, 'json');
+            var url = "https://ready-set-go.herokuapp.com/search/";
+            $.get(url, locations, function(rawPath) {   
+                
+            }, 'json');
         });
     };
     
@@ -131,21 +130,40 @@ $(document).ready(function() {
      * Draws the given route number's path onto the map
      */
     function drawPath(routeNumber){
-        //TODO remove previous paths from the map
         var url = "https://ready-set-go.herokuapp.com/path/"+routeNumber;
         $.get(url, function(rawPath) {
             var pathData = [];
-
+            removePath();
             // Get route information & iterate over into array
             for (var i = 0; i < rawPath.length; i++){
                 pathData[i] = new google.maps.LatLng(rawPath[i].shape_pt_lat, rawPath[i].shape_pt_lon);
-                var busPath = new google.maps.Polyline({
+                busPath = new google.maps.Polyline({
                     path: pathData 
                 });
-                busPath.setMap(map);
             }
+            busPath.setMap(map);
         }, 'json');
     };
+    
+    /**
+     * Removes the currently drawn path from map
+     */
+    function removePath(){
+        if(typeof busPath !== 'undefined'){
+            busPath.setMap(null);
+        };
+    }
+    
+    /**
+     * draws a marker at the given point and adds 
+     */
+    function drawMarker(lat, lng){
+        var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lng),
+            map: map
+//            title: 'Hello World!'
+        });
+    }
 
     /** 
      * Turns the inputAddress into a geolocation
@@ -175,7 +193,7 @@ $(document).ready(function() {
 //            navigationControl: false,
 //            mapTypeControl: false,
 //            scaleControl: false,
-//            draggable: false,
+            draggable: false,
             disableDefaultUI: true,
             center: new google.maps.LatLng(-41.3, 174.783),
             mapTypeId: google.maps.MapTypeId.ROADMAP

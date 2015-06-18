@@ -1,45 +1,76 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<!-- Meta tags -->
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<!-- Meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Ready Set Go | Home</title>
+	<title>Ready Set Go | Home</title>
 
-		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
-		<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="stylesheet.css">
-	</head>
-	
-	<body>
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
 
-		<div class="navbar navbar-inverse navbar-static-top">
-			<div class="container">
-				<p class="navbar-brand">Ride <span class="titleEmphasis">Along</span></p>
-			</div>
-		</div>
+<body>
 
-		<!-- Map (Google Maps) -->
+	<div class="navbar navbar-inverse navbar-static-top">
 		<div class="container">
-			<div class="panel panel-default">
-				<div class="panel-body">
-					<!-- Embeded Google Map -->
-					<div class="embed-responsive embed-responsive-4by3">
-						<iframe class="embed-responsive-item" src="https://www.google.com/maps/embed/v1/place?q=Te%20Aro%2C%20Wellington%2C%20New%20Zealand&key=AIzaSyA-02CDhuOT5nAyGGhq7Cg9Lob5EJDw9ag"></iframe>
-					</div>
+			<p class="navbar-brand">Ride <span class="titleEmphasis">Along</span></p>
+		</div>
+	</div>
+
+	<!-- Map (Google Maps) -->
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<!-- Embeded Google Map -->
+				<div class="embed-responsive embed-responsive-4by3">
+					<iframe class="embed-responsive-item" src="https://www.google.com/maps/embed/v1/place?q=Te%20Aro%2C%20Wellington%2C%20New%20Zealand&key=AIzaSyA-02CDhuOT5nAyGGhq7Cg9Lob5EJDw9ag"></iframe>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<div class="container finalContent">
-			<div class="row">
-				<div class="col-xs-7">
-					<h1>Get Off in <span id="stopsAway" class="titleEmphasis">5</span> Stops</h1>
+	<div class="container finalContent">
+		<div class="row">
+			<div class="col-xs-12">
+				<h1>Get Off in <span id="stopsAway" class="titleEmphasis">5</span> Stops</h1>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-7">
+				<h3>Landmarks</h3>
+			</div>
+		</div>
+
+		<div class="row"> 
+			<div class="col-xs-5" >
+				<div class="thumbnail">
+					<img src="images/gardens.svg">
 				</div>
 			</div>
+				<div class="col-xs-7" >
+					<h4><span class="titleEmphasis">The Botanic Gardens</span></h4>
+					<h5>It is made up of 25 hectares of protected native forest, seasonal flower displays, and plant collections.</h5>
+				</div>
+			</div>
+
+		<div class="row"> 
+			<div class="col-xs-5" >
+				<div class="thumbnail">
+					<img src="images/beehive.svg">
+				</div>
+			</div>
+				<div class="col-xs-7" >
+					<h4><span class="titleEmphasis">The Beehive</span></h4>
+					<h5>Is the common name for the Executive Wing of the New Zealand Parliament buildings. It is 10 storeys high and was built in 1981.</h5>
+				</div>
+			</div>
+		
 		</div>
 
 		<!-- Footer -->
@@ -55,4 +86,4 @@
 		<script src="js/jquery-1.11.3.min.js"></script>
 		<script src="bootstrap/js/bootstrap.js"></script>
 	</body>
-</html>
+	</html>

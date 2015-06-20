@@ -1,85 +1,105 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<!-- Meta tags -->
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+<head>
+	<!-- Meta tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>Ready Set Go | Home</title>
+	<title>Ready Set Go | Home</title>
 
-		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
-		<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="stylesheet.css">
-	</head>
-	
-	<body>
-		<div class="navbar navbar-inverse navbar-static-top">
-			<div class="container">
-				<p class="navbar-brand">How to Use <span class="titleEmphasis">Snapper</span></p>
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+	<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+</head>
+
+<body>
+	<div class="navbar navbar-inverse navbar-static-top">
+		<div class="container">
+			<p class="navbar-brand">How to Use <span class="titleEmphasis">Snapper</span></p>
+		</div>
+	</div>
+
+
+
+
+
+	<div class="container finalContent">
+		<div class="row"> <!-- First Row -->
+			<div class="col-xs-12">
+				<div class="thumbnail">
+					<img src="images/stepsSnapper01.png" onclick='this.src="images/stepsSnapper01.gif"'>
+					<h4>Snapper is the easiest way to pay your fare. You can order a Snapper Card online from<br> <a href ="http://www.snapper.co.nz/snapper-store">The Snapper Store</a></h4>
+				</div>
 			</div>
 		</div>
 
 
-
-
-
-<div class="container finalContent">
-<div class="row"> <!-- First Row -->
-				<div class="col-xs-12">
-					<div class="thumbnail">
-					<img src="images/stepsSnapper01.png" onclick='this.src="images/stepsSnapper01.gif"'>
-						<h4>Snapper is the easiest way to pay your fare. You can order a Snapper Card online from<br> <a href ="http://www.snapper.co.nz/snapper-store">The Snapper Store</a></h4>
+		<div class="row"> <!-- Second Row -->
+			<div class="col-xs-12">
+				<div class="thumbnail">
+					<div style="position: relative; overflow:hidden;">
+					<img src="images/stepsSnapper02b.svg" style= "position: absolute; z-index: 2; width:100%; left: 20%; top: 20%;" class="snapper01">
+					<img src="images/stepsSnapper02.svg" onclick='this.src="images/stepsSnapper02a.svg"' style ="width:100%;" class= "snapper">
+						
 					</div>
+					<h4>Touch the card to the reader at the front of the bus to tag on</h4>
 				</div>
-</div>
+			</div>
+		</div>
 
 
-<div class="row"> <!-- Second Row -->
-				<div class="col-xs-12">
-					<div class="thumbnail">
-					<img src="images/stepsSnapper02.png" onclick='this.src="images/stepsSnapper02.gif"'>
-						<h4>Touch the card to the reader at the front of the bus to tag on</h4>
-					</div>
-				</div>
-</div>
-
-
-<div class="row"> <!-- Third Row -->
-				<div class="col-xs-12">
-					<div class="thumbnail">
+		<div class="row"> <!-- Third Row -->
+			<div class="col-xs-12">
+				<div class="thumbnail">
 					<img src="images/stepsSnapper03.png">
-						<h4>The reader displays your current balance and your fare<br> A green circle means you have tagged on<br><br>
-							A red cross means something went wrong. The reader will say 'Please Try Again' <br>or 'Please Pay The Driver'</h4>
+					<h4>The reader displays your current balance and your fare<br> A green circle means you have tagged on<br><br>
+						A red cross means something went wrong. The reader will say 'Please Try Again' <br>or 'Please Pay The Driver'</h4>
 					</div>
 				</div>
-</div>
+			</div>
 
-<div class="row"> <!-- Fourth Row -->
+			<div class="row"> <!-- Fourth Row -->
 				<div class="col-xs-12">
 					<div class="thumbnail">
-					<img src="images/stepsSnapper04.png" onclick='this.src="images/stepsSnapper04.gif"'>
+						<img src="images/stepsSnapper04.png" onclick='this.src="images/stepsSnapper04.gif"'>
 						<h4>Touch your card to the reader at the front or back of the bus to tag off and disembark carefully</h4>
 					</div>
 				</div>
-</div>
+			</div>
 
-</div>
+		</div>
 
 		<!-- Footer -->
 		<div class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<p class="navbar-text">
-				<a href="index.html">
-					<span class="titleEmphasis"><< HOME</span>
-				</a>
-			</p>
+					<a href="index.html">
+						<span class="titleEmphasis"><< HOME</span>
+					</a>
+				</p>
 			</div>
 		</div>
 
 		<!-- JS -->
 		<script src="js/jquery-1.11.3.min.js"></script>
 		<script src="bootstrap/js/bootstrap.js"></script>
+
+
+		<script type="text/javascript">
+		$(document).ready(function(){
+
+
+		//Snapping on
+		
+		$(".snapper").click(function(){
+			$(".snapper01").animate({left: "0%", top: "0%"}, 800).delay(500).animate({left: "20%", top: "20%"}, 800);
+		});
+		$(".snapper01").click(function(){
+			$(".snapper01").animate({left: "0%", top: "0%"}, 800).delay(500).animate({left: "20%", top: "20%"}, 800);
+		});
+	});
+		</script>
 	</body>
-</html>
+	</html>

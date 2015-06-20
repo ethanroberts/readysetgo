@@ -29,7 +29,7 @@
 		<div class="row"> <!-- First Row -->
 			<div class="col-xs-12">
 				<div class="thumbnail">
-					<img src="images/stepsSnapper01.png" onclick='this.src="images/stepsSnapper01.gif"'>
+					<img src="images/stepsSnapper01.png" onclick='this.src="images/stepsSnapper01.gif"' style ="width:100%;">
 					<h4>Snapper is the easiest way to pay your fare. You can order a Snapper Card online from<br> <a href ="http://www.snapper.co.nz/snapper-store">The Snapper Store</a></h4>
 				</div>
 			</div>
@@ -40,9 +40,8 @@
 			<div class="col-xs-12">
 				<div class="thumbnail">
 					<div style="position: relative; overflow:hidden;">
-					<img src="images/stepsSnapper02b.svg" style= "position: absolute; z-index: 2; width:100%; left: 20%; top: 20%;" class="snapper01">
 					<img src="images/stepsSnapper02.svg" onclick='this.src="images/stepsSnapper02a.svg"' style ="width:100%;" class= "snapper">
-						
+					<img src="images/stepsSnapper02b.svg" style= "position: absolute; z-index: 2; width:100%; left: 20%; top: 20%;" class="snapper01">
 					</div>
 					<h4>Touch the card to the reader at the front of the bus to tag on</h4>
 				</div>
@@ -53,7 +52,7 @@
 		<div class="row"> <!-- Third Row -->
 			<div class="col-xs-12">
 				<div class="thumbnail">
-					<img src="images/stepsSnapper03.png">
+					<img src="images/stepsSnapper03.png" style ="width:100%;">
 					<h4>The reader displays your current balance and your fare<br> A green circle means you have tagged on<br><br>
 						A red cross means something went wrong. The reader will say 'Please Try Again' <br>or 'Please Pay The Driver'</h4>
 					</div>
@@ -63,7 +62,7 @@
 			<div class="row"> <!-- Fourth Row -->
 				<div class="col-xs-12">
 					<div class="thumbnail">
-						<img src="images/stepsSnapper04.png" onclick='this.src="images/stepsSnapper04.gif"'>
+						<img src="images/stepsSnapper04.png" onclick='this.src="images/stepsSnapper04.gif"' style ="width:100%;">
 						<h4>Touch your card to the reader at the front or back of the bus to tag off and disembark carefully</h4>
 					</div>
 				</div>
@@ -94,10 +93,10 @@
 		//Snapping on
 		
 		$(".snapper").click(function(){
-			$(".snapper01").animate({left: "0%", top: "0%"}, 800).delay(500).animate({left: "20%", top: "20%"}, 800);
+			$(".snapper01").animate({left: "0%", top: "0%"}, 400).delay(500).animate({left: "20%", top: "20%"}, 400);
 		});
 		$(".snapper01").click(function(){
-			$(".snapper01").animate({left: "0%", top: "0%"}, 800).delay(500).animate({left: "20%", top: "20%"}, 800);
+			$(".snapper01").animate({left: "0%", top: "0%"}, 400).delay(500).animate({left: "20%", top: "20%"}, 400);
 		});
 	});
 		</script>

@@ -105,8 +105,7 @@
 		
 //Bus running over the kid
 		$(".runOverTap").click(function(){
-			$(".runOver").attr("src","images/running.gif");
-			$(".runOver").animate({left: "28%"},1100);
+			$(".runOver").queue(function(next) { $(this).attr('src','images/running.gif'); next(); }).animate({left: "28%"},1100);
 			$(".runOverBus").animate({left: "8%", width: "100%"},1000);
 			//$(".runOverBus").animate({width: "100%"},400);
 			$(".runOver").queue(function(next) { $(this).attr('src','images/safe02c.png'); next(); });

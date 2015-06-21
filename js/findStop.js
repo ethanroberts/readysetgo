@@ -1,7 +1,7 @@
 // TODO Add loaders
 // TODO Dynamic stop info
 // TODO Map styling - remove locations only core roads
-// TODO Auto draw bus routes on map, instead of buttons? Or make button handler for any button?
+// TODO remove route buttons once path drawing is working
 
 // Users most up to date location and their destination location
 var locations = {
@@ -16,7 +16,13 @@ var busPath;        // The current bus path drawn on the map
 
 var map;            // The map
 var geocoder;       // Used for geocoding the address
+var bounds;         // Used for calculating the area of the map
+
 var markers = [];   // The markers which are currently drawn on the map
+var USER_INDEX = 0; // The position of the four markers which are drawn on the map
+var DEST_INDEX = 1;
+var USER_STOP_INDEX = 2;
+var DEST_STOP_INDEX = 3;
 
 $(document).ready(function () {
     // Helper function to deal with button events.
@@ -54,10 +60,8 @@ $(document).ready(function () {
      * Searches for the suitable bus stop to get on and off at
      */
     function search() {
-        // TODO Make search work basic brute force version using both input and auto
+        // TODO Make search work basic brute force version using both input and auto - check input box
         // TODO Checks to make sure input is valid
-        // TODO Move map so that everything is in the view
-        // TODO remove previous markers
                                 
         var destination = document.getElementById("destination").value;
 
@@ -67,13 +71,14 @@ $(document).ready(function () {
             locations.destLng = result.F;
             
             var url = "https://ready-set-go.herokuapp.com/search/"+JSON.stringify(locations);
-            console.log(url);
+//            console.log(url);
             $.get(url, locations, function (res) {
-                console.log(res);
+//                console.log(res);
+                
 //                destStop: 11987destStopLat: -40.87136702destStopLng: 175.0676345dist: 12615785.95803772routeNumber: "289"userStop: 10357userStopLat: -41.27861635userStopLng: 174.7787021
                 drawPath(res.routeNumber);
-                drawMarker(res.destStopLat, res.destStopLng);
-                drawMarker(res.userStopLat, res.userStopLng);
+                drawMarker(res.destStopLat, res.destStopLng, DEST_STOP_INDEX);
+                drawMarker(res.userStopLat, res.userStopLng, USER_STOP_INDEX);
                 updateStopInfo(res.userStop, res.routeNumber);
                 
             }, 'json');
@@ -117,16 +122,10 @@ $(document).ready(function () {
      * Centres map on users location once the map is created
      */
     function usePosition(pos) {
-        // TODO add a marker for user
-        // TODO keep moving map to keep user centred ensuring everything stays in view
         locations.userLat = pos.coords.latitude;
         locations.userLng = pos.coords.longitude;
         
-        drawMarker(locations.userLat, locations.userLng);
-        
-        map.setCenter(new google.maps.LatLng(locations.userLat, locations.userLng));
-        
-        console.log(locations);
+        drawMarker(locations.userLat, locations.userLng, USER_INDEX);        
     }
 
     /**
@@ -207,13 +206,33 @@ $(document).ready(function () {
     /**
      * draws a marker at the given point and adds 
      */
-    function drawMarker(lat, lng) {
+    function drawMarker(lat, lng, index) {
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, lng),
             map: map
 //            title: 'Hello World!'
         });
-        markers.push(marker);
+//        console.log(markers[index]);
+        if (typeof markers[index] !== 'undefined'){
+            markers[index].setMap(null);
+        }
+        
+        markers[index] = marker;
+        
+        bounds = new google.maps.LatLngBounds()
+        for (var i = 0; i < markers.length; i++) {
+            if(typeof markers[i] !== 'undefined') {                
+                bounds.extend(new google.maps.LatLng(markers[i].getPosition().lat(), markers[i].getPosition().lng()));
+            }
+        }
+        
+        map.setCenter(bounds.getCenter());
+        map.fitBounds(bounds);
+        map.setZoom(map.getZoom());
+        
+        if(map.getZoom() > 14){
+            map.setZoom(14);
+        }
     }
 
     /** 
@@ -241,13 +260,14 @@ $(document).ready(function () {
 //            navigationControl: false,
 //            mapTypeControl: false,
 //            scaleControl: false,
-            draggable: false,
+//            draggable: false,
             disableDefaultUI: true,
             center: new google.maps.LatLng(-41.3, 174.783),
             mapTypeId: google.maps.MapTypeId.ROADMAP
         };
         map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
         geocoder = new google.maps.Geocoder();
+        bounds = new google.maps.LatLngBounds();
     }
 
     google.maps.event.addDomListener(window, 'load', initialise);

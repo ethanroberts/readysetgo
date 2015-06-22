@@ -240,9 +240,10 @@ $(document).ready(function () {
      * inputid is the users entered string
      */
     function codeAddress(inputAddress, callback) {
-        // TODO Create a preference/focus for Wellington area
         // TODO Create a better dialogue box for failure
         // TODO Fail if location is too far away, try another result?
+        
+        inputAddress = inputAddress + ', Wellington, New Zealand';
         geocoder.geocode( { 'address': inputAddress}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
                 callback( results[0].geometry.location);

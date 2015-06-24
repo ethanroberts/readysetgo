@@ -1,5 +1,5 @@
 // TODO Add loaders
-// TODO Dynamic stop info
+// TODO Dynamic stop info how long until the next bus
 // TODO Map styling - remove locations only core roads
 // TODO remove route buttons once path drawing is working
 
@@ -32,6 +32,7 @@ $(document).ready(function () {
             search();
             break;
         case "useFromLocation":
+            codeUserAddress();
             break;
         case "b11":
             drawPath(11);
@@ -47,9 +48,6 @@ $(document).ready(function () {
             break;
         case "b57":
             drawPath(57);
-            break;
-        case "useFromLocation":
-            codeUserAddress();
             break;
         default:
             alert("No button ID found for: " + event.target.id);
@@ -69,17 +67,16 @@ $(document).ready(function () {
             // TODO Check that result is valid
             locations.destLat = result.A;
             locations.destLng = result.F;
+            drawMarker(locations.destLat, locations.destLng);
             
             var url = "https://ready-set-go.herokuapp.com/search/"+JSON.stringify(locations);
-//            console.log(url);
             $.get(url, locations, function (res) {
-//                console.log(res);
-                
-//                destStop: 11987destStopLat: -40.87136702destStopLng: 175.0676345dist: 12615785.95803772routeNumber: "289"userStop: 10357userStopLat: -41.27861635userStopLng: 174.7787021
                 drawPath(res.routeNumber);
                 drawMarker(res.destStopLat, res.destStopLng, DEST_STOP_INDEX);
                 drawMarker(res.userStopLat, res.userStopLng, USER_STOP_INDEX);
                 updateStopInfo(res.userStop, res.routeNumber);
+
+                mapBounds();
                 
             }, 'json');
         });
@@ -105,6 +102,7 @@ $(document).ready(function () {
      */
     function codeUserAddress(){
         var userAddress = document.getElementById("userLocation").value;
+        console.log(userAddress);
         codeAddress(destination, function (result) {
             locations.userLat = result.A;
             locations.userLng = result.F;
@@ -115,7 +113,20 @@ $(document).ready(function () {
      * Ensures that everything on the map is actually on the map, changes zoom levels as appropriate
      */
     function mapBounds() {
-           
+        bounds = new google.maps.LatLngBounds()
+        for (var i = 0; i < markers.length; i++) {
+            if(typeof markers[i] !== 'undefined') {                
+                bounds.extend(new google.maps.LatLng(markers[i].getPosition().lat(), markers[i].getPosition().lng()));
+            }
+        }
+        
+        map.setCenter(bounds.getCenter());
+        map.fitBounds(bounds);
+        map.setZoom(map.getZoom());
+        
+        if(map.getZoom() > 14){
+            map.setZoom(14);
+        }
     }
     
     /**
@@ -166,8 +177,11 @@ $(document).ready(function () {
         var url = "https://ready-set-go.herokuapp.com/path/" + routeNumber;
         console.log('Drawing route #' + routeNumber);
         $.get(url, function (rawPath) {
+
             var pathData = [];
+
             removePath();
+
             // Get route information & iterate over into array
             for (var i = 0; i < rawPath.length; i++){
                 pathData[i] = new google.maps.LatLng(rawPath[i].shape_pt_lat, rawPath[i].shape_pt_lon);
@@ -177,8 +191,7 @@ $(document).ready(function () {
             }
             busPath.setMap(map);
         }, 'json');
-    }
-    
+    }  
     
     
     /**
@@ -191,7 +204,7 @@ $(document).ready(function () {
     }
     
     /**
-     *
+     * Updates the title and stop info where the user needs to get on the bus
      */
     function updateStopInfo(stopID, routeNumber) {
         var url = "https://ready-set-go.herokuapp.com/stopallinfo/"+stopID;
@@ -204,7 +217,7 @@ $(document).ready(function () {
     }
     
     /**
-     * draws a marker at the given point and adds 
+     * draws a marker at the given point and adds it to the marker array
      */
     function drawMarker(lat, lng, index) {
         var marker = new google.maps.Marker({
@@ -212,27 +225,12 @@ $(document).ready(function () {
             map: map
 //            title: 'Hello World!'
         });
-//        console.log(markers[index]);
+
         if (typeof markers[index] !== 'undefined'){
             markers[index].setMap(null);
         }
         
         markers[index] = marker;
-        
-        bounds = new google.maps.LatLngBounds()
-        for (var i = 0; i < markers.length; i++) {
-            if(typeof markers[i] !== 'undefined') {                
-                bounds.extend(new google.maps.LatLng(markers[i].getPosition().lat(), markers[i].getPosition().lng()));
-            }
-        }
-        
-        map.setCenter(bounds.getCenter());
-        map.fitBounds(bounds);
-        map.setZoom(map.getZoom());
-        
-        if(map.getZoom() > 14){
-            map.setZoom(14);
-        }
     }
 
     /** 
@@ -246,6 +244,7 @@ $(document).ready(function () {
         inputAddress = inputAddress + ', Wellington, New Zealand';
         geocoder.geocode( { 'address': inputAddress}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
+                console.log(results);
                 callback( results[0].geometry.location);
             } else {
                 alert("Geocode was not successful for the following reason: " + status);

@@ -65,6 +65,6 @@ body {
 .loader img{
     position: absolute;
     top: 40%;
-    left: 50%;
+    left: 40%;
     margin-right: -50%;    
 }

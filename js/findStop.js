@@ -1,4 +1,3 @@
-// TODO Add loaders
 // TODO Dynamic stop info how long until the next bus
 // TODO Map styling - remove locations only core roads
 // TODO remove route buttons once path drawing is working

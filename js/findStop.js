@@ -31,9 +31,6 @@ $(document).ready(function () {
         case "search":
             search();
             break;
-        case "useFromLocation":
-            codeUserAddress();
-            break;
         case "b11":
             drawPath(11);
             break;
@@ -53,12 +50,15 @@ $(document).ready(function () {
             alert("No button ID found for: " + event.target.id);
         }
     });
+    
+    $("#location-input").on('click', "#useFromLocation", function(event){
+        codeUserAddress();
+    });
 
     /**
      * Searches for the suitable bus stop to get on and off at
      */
     function search() {
-        // TODO Make search work basic brute force version using both input and auto - check input box
         // TODO Checks to make sure input is valid
                                 
         var destination = document.getElementById("destination").value;
@@ -102,10 +102,12 @@ $(document).ready(function () {
      */
     function codeUserAddress(){
         var userAddress = document.getElementById("userLocation").value;
-        console.log(userAddress);
-        codeAddress(destination, function (result) {
+        codeAddress(userAddress, function (result) {
             locations.userLat = result.A;
             locations.userLng = result.F;
+            
+            drawMarker(locations.userLat, locations.userLng, USER_INDEX);            
+            mapBounds();
         });
     }
     
@@ -136,7 +138,8 @@ $(document).ready(function () {
         locations.userLat = pos.coords.latitude;
         locations.userLng = pos.coords.longitude;
         
-        drawMarker(locations.userLat, locations.userLng, USER_INDEX);        
+        drawMarker(locations.userLat, locations.userLng, USER_INDEX);
+        mapBounds();
     }
 
     /**

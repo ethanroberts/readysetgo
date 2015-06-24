@@ -62,7 +62,9 @@ $(document).ready(function () {
         // TODO Checks to make sure input is valid
                                 
         var destination = document.getElementById("destination").value;
-
+        
+        showLoader();
+        
         codeAddress(destination, function (result) {
             // TODO Check that result is valid
             locations.destLat = result.A;
@@ -71,6 +73,7 @@ $(document).ready(function () {
             
             var url = "https://ready-set-go.herokuapp.com/search/"+JSON.stringify(locations);
             $.get(url, locations, function (res) {
+                hideLoader();
                 drawPath(res.routeNumber);
                 drawMarker(res.destStopLat, res.destStopLng, DEST_STOP_INDEX);
                 drawMarker(res.userStopLat, res.userStopLng, USER_STOP_INDEX);
@@ -101,8 +104,11 @@ $(document).ready(function () {
      *
      */
     function codeUserAddress(){
+        showLoader();
         var userAddress = document.getElementById("userLocation").value;
+        
         codeAddress(userAddress, function (result) {
+            hideLoader();
             locations.userLat = result.A;
             locations.userLng = result.F;
             

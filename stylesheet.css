@@ -50,3 +50,21 @@ body {
 #registerSection {
     text-align: center;
 }
+
+.loader {
+    top:0;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    background: rgba(0,0,0,.5);
+    position: fixed;
+    z-index: 1000;
+}
+
+.loader img{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-right: -50%;    
+}

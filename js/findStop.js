@@ -69,7 +69,7 @@ $(document).ready(function () {
             // TODO Check that result is valid
             locations.destLat = result.A;
             locations.destLng = result.F;
-            drawMarker(locations.destLat, locations.destLng);
+            drawMarker(locations.destLat, locations.destLng, DEST_INDEX);
             
             var url = "https://ready-set-go.herokuapp.com/search/"+JSON.stringify(locations);
             $.get(url, locations, function (res) {

@@ -41,3 +41,12 @@ body {
 .settingsIcon {
     color: white;
 }
+
+.indexLink {
+    text-decoration: none;
+    color: #000;
+}
+
+#registerSection {
+    text-align: center;
+}

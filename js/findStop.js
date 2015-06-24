@@ -229,9 +229,31 @@ $(document).ready(function () {
      * draws a marker at the given point and adds it to the marker array
      */
     function drawMarker(lat, lng, index) {
+        var markerIcon;
+        
+        switch (index) {
+            case 0:
+                markerIcon = "../images/me.png";
+                break;
+            case 1:
+                markerIcon = "../images/Destination.png";
+                break;
+            case 2:
+                markerIcon = "../images/stopA.png";
+                break;
+            case 3:
+                markerIcon = "../images/stopB.png";
+                break;
+            default:
+                console.log("Incorrect index for marker icon: " + index);
+                break;
+        }
+        
         var marker = new google.maps.Marker({
             position: new google.maps.LatLng(lat, lng),
-            map: map
+            map: map,
+            icon: markerIcon
+
 //            title: 'Hello World!'
         });
 

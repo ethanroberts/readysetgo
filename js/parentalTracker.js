@@ -4,7 +4,7 @@ $(document).ready(function () {
     // ******* Map initialisation ******
     function initialise() {
         var mapOptions = {
-            zoom: 1,
+            zoom: 14,
             scrollwheel: false,
             navigationControl: false,
             mapTypeControl: false,

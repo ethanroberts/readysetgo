@@ -18,7 +18,7 @@
 		<div class="navbar navbar-inverse navbar-static-top">
 			<div class="container">
 				<p class="navbar-brand">Find a <span class="titleEmphasis">Stop</span></p>
-				<button type="button" class="navbar-toggle settingsIcon" data-toggle="modal" data-target="#settingsModal">
+				<button type="button" class="navbar-toggle settingsIcon" data-toggle="modal" data-target="#settingsModal" id="toggleSettings">
 					<span class="pull-right glyphicon glyphicon-wrench" aria-hidden="true"></span>
 				</button>
 			</div>
@@ -46,15 +46,15 @@
 		<!-- Stop Information -->
 		<div class="container finalContent">
 			<div class="row">
-				<div class="col-xs-7">
+				<div class="col-md-7">
 					<h1 id="stopInfoH1">Stop Information</h1>
-					<p id="stopInfoP">Information about the stop would go here.</p>
+					<p id="stopInfoP">Please enter a destination and press 'Find Closest Stop'</p>
 					<!-- Bus Route Numbers -->
-					<button class="label-warning" id="b11">11</button>
-					<button class="label-warning" id="b17">17</button>
-					<button class="label-warning" id="b42">42</button>
-					<button class="label-warning" id="b52">52</button>
-					<button class="label-warning" id="b57">57</button>
+					<button class="btn label-warning" id="b11">11</button>
+					<button class="btn label-warning" id="b17">17</button>
+					<button class="btn label-warning" id="b42">42</button>
+					<button class="btn label-warning" id="b52">52</button>
+					<button class="btn label-warning" id="b57">57</button>
 				</div>
 			</div>
 		</div>
@@ -105,7 +105,7 @@
 			      	</div>
 
 			    	<div class="modal-footer">
-			        	<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        	<button type="button" class="btn btn-default" data-dismiss="modal" id="closeSettingsModal">Close</button>
 			    	</div>
 			    </div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->

@@ -17,6 +17,46 @@ var locations = {
 
 $(document).ready(function () {
     
+    /**
+     * Centres map on users location once the map is created
+     */
+    function usePosition(pos) {
+        locations.userLat = pos.coords.latitude;
+        locations.userLng = pos.coords.longitude;
+        
+        drawMarker(locations.userLat, locations.userLng, USER_INDEX);
+        
+        if(typeof localStorage.destStopID !== 'undefined'){
+            drawMarker(localStorage.destStopLat, localStorage.destStopLng, DEST_STOP_INDEX);
+            
+            var numStopsData = {
+                destStopID: localStorage.destStopID,
+                destStopLat: localStorage.destStopLat,
+                destStopLng: localStorage.destStopLng
+            };
+            
+            var url = "https://ready-set-go.herokuapp.com/numberofstops/"+JSON.stringify(numStopsData);
+            $.get(url, function (res) {
+                drawPath(res.routeNumber);
+                
+                updateLandmarks(res.numberOfStopsRemaining);
+
+            }, 'json');
+        } else {
+            // TODO graceful error handling if the user hasn't found a stop on teh find a stop page
+            alert('Please find a stop before riding along.');
+        }        
+
+        mapBounds();
+    }
+    
+    /**
+     * Updates the stops remaining and landmarks
+     */
+    function updateLandmarks(){
+        
+    }
+    
     /** 
      * Watches the users location
      */
@@ -30,16 +70,6 @@ $(document).ready(function () {
         } else {
             noGeolocation(false);
         }
-    }
-    
-    /**
-     * Centres map on users location once the map is created
-     */
-    function usePosition(pos) {
-        locations.userLat = pos.coords.latitude;
-        locations.userLng = pos.coords.longitude;
-        
-        drawMarker(locations.userLat, locations.userLng, USER_INDEX);
     }
 
     /**
@@ -134,7 +164,7 @@ $(document).ready(function () {
     }
 
     /**
-     * Ensures that everything on the map is actually on the map, changes zoom levels as appropriate
+     * Keeps the map centered over the users position
      */
     function mapBounds() {        
         map.setCenter(new google.maps.LatLng(locations.userLat, locations.userLng));

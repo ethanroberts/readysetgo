@@ -73,6 +73,7 @@ $(document).ready(function () {
             var url = "https://ready-set-go.herokuapp.com/search/"+JSON.stringify(locations);
             $.get(url, locations, function (res) {
                 hideLoader();
+                saveDestinationStop(res.destStop);
                 drawPath(res.routeNumber);
                 drawMarker(res.destStopLat, res.destStopLng, DEST_STOP_INDEX);
                 drawMarker(res.userStopLat, res.userStopLng, USER_STOP_INDEX);
@@ -97,6 +98,15 @@ $(document).ready(function () {
         } else {
             noGeolocation(false);
         }
+    }
+    
+    /**
+     * Saves the destination stop to local storage for use on the ride along page
+     */
+    function saveDestinationStop(stopID){
+        localStorage.destStopID = stopID;
+        localStorage.destStopLat = locations.destLat;
+        localStorage.destStopLng = locations.destLng;
     }
     
     /**

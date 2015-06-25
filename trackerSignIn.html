@@ -58,7 +58,7 @@
 		<div class="navbar navbar-inverse navbar-fixed-bottom">
 			<div class="container">
 				<a href="index.html">
-					<p class="navbar-text"><span class="titleEmphasis"><< HOME</span></p>
+					<p class="navbar-text"><span class="titleEmphasis"> HOME</span></p>
 				</a>
 			</div>
 		</div>
@@ -72,8 +72,8 @@
 
  			$("#pwBtn").bind("click", function(event, ui){
    				var q = new Object();
-   				q.username = $("#user").val();
-   				q.password = $("#pw").val();
+   				q.username = $("#username").val();
+   				q.password = $("#password").val();
 
    				//var jsonUrl = '/user/';
    				//var newUser = {"username" : q.username, "password" : q.password};
@@ -89,8 +89,8 @@
 
  			$("#registerBtn").bind("click", function(event, ui){
    				var q = new Object();
-   				q.username = $("#user").val();
-   				q.password = $("#pw").val();
+   				q.username = $("#username").val();
+   				q.password = $("#password").val();
 
    				//https encrypted
     			var jsonUrl = "https://cryptic-sands-8943.herokuapp.com/user/";

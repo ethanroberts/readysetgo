@@ -35,7 +35,7 @@ body {
 }
 
 .finalContent {
-    margin-bottom: 20vh;
+    /*margin-bottom: 20vh;*/
 }
 
 .settingsIcon {
@@ -68,4 +68,10 @@ body {
     top: 50vh;
     margin: 0 auto;
     color: white;
+}
+
+.paddingFix {
+    background-color: #a3a3a3;
+    height: 20vh;
+    width: 100vw;
 }

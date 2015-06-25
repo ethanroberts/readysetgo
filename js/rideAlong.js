@@ -19,22 +19,50 @@ var locations = {
 };
 
 $(document).ready(function () {
+
+    $("button").click(function (event) {
+        switch (event.target.id) {
+        case "1":
+            fakePos(-41.283837, 174.74109999999996);
+        //-41.283837
+        //174.74109999999996
+            break;
+        case "2":
+            fakePos( -41.2869829, 174.75702109999997);
+        // -41.2869829
+        // 174.75702109999997
+            break;
+        case "3":
+            fakePos(-41.2782607, 174.7742283);
+        // -41.2782607
+        // 174.7742283
+            break;
+        case "4":
+            fakePos(-41.2809732, 174.77593820000004);
+        // -41.2809732
+        // 174.77593820000004
+            break;
+        default:
+            // alert("No button ID found for: " + event.target.id);
+        }
+    });
     
     /**
      * Centres map on users location once the map is created
      */
     function usePosition(pos) {
-        console.log('usePosition');
+        // console.log('usePosition');
         locations.userLat = pos.coords.latitude;
         locations.userLng = pos.coords.longitude;
         
         drawMarker(locations.userLat, locations.userLng, USER_INDEX);
         
-        
+        // console.log(localStorage.destStopID);
         if(typeof localStorage.destStopID !== 'undefined'){
             drawMarker(localStorage.destStopLat, localStorage.destStopLng, DEST_STOP_INDEX);
             
-            
+            // console.log(locations.userLat);
+
             var numStopsData = {
                 destStopID: localStorage.destStopID,
                 destStopLat: localStorage.destStopLat,
@@ -46,7 +74,7 @@ $(document).ready(function () {
             
             var url = "https://ready-set-go.herokuapp.com/numberofstops/"+JSON.stringify(numStopsData);
             $.get(url, function (res) {
-                console.log(res);
+                // console.log(res);
                 drawPath(localStorage.routeNumber);
                 
                 updateLandmarks(res.numberOfStopsRemaining);
@@ -64,7 +92,7 @@ $(document).ready(function () {
      * Updates the stops remaining and landmarks
      */
     function updateLandmarks(stopsRemaining){
-        console.log('stopsRemaining' + stopsRemaining);
+        // console.log('stopsRemaining' + stopsRemaining);
         $('#ridealong-title').html('Get Off in <span id="stopsAway" class="titleEmphasis">' + stopsRemaining + '</span> Stops');
         
         if(localStorage.routeNumber == 3){
@@ -136,6 +164,16 @@ $(document).ready(function () {
         }
     }
 
+    function fakePos(lat, lng){
+        var position = {
+            coords: {
+                latitude: lat,
+                longitude: lng
+            }
+        };
+        usePosition(position);
+    }
+
     /**
      * What to do if geolocation isn't available
      */
@@ -147,10 +185,26 @@ $(document).ready(function () {
         };
         
         if (geoError) {
-            alert("Geolocation service failed: "  +errors[geoError.code]);
+            // alert("Geolocation service failed: "  +errors[geoError.code]);
         } else {
-            alert("Browser/device doesn't support geolocation");
+            // alert("Browser/device doesn't support geolocation");
         }
+
+        locations.userLat = localStorage.userLat;
+        locations.userLng = localStorage.userLng;
+
+        // console.log(locations.userLat);
+
+        var position = {
+            coords: {
+                latitude: locations.userLat,
+                longitude: locations.userLng
+            }
+        };
+
+        // console.log(position);
+
+        usePosition(position);
     }
 
     /**
@@ -158,7 +212,7 @@ $(document).ready(function () {
      */
     function drawPath(routeNumber) {
         var url = "https://ready-set-go.herokuapp.com/path/" + routeNumber;
-        console.log('Drawing route #' + routeNumber);
+        // console.log('Drawing route #' + routeNumber);
         $.get(url, function (rawPath) {
 
             var pathData = [];
@@ -194,16 +248,16 @@ $(document).ready(function () {
         
         switch (index) {
             case 0:
-                markerIcon = "../images/me.png";
+                markerIcon = "./images/me.png";
                 break;
             case 1:
-                markerIcon = "../images/Destination.png";
+                markerIcon = "./images/Destination.png";
                 break;
             case 2:
-                markerIcon = "../images/stopA.png";
+                markerIcon = "./images/stopA.png";
                 break;
             case 3:
-                markerIcon = "../images/stopB.png";
+                markerIcon = "./images/stopB.png";
                 break;
             default:
                 console.log("Incorrect index for marker icon: " + index);
@@ -254,4 +308,5 @@ $(document).ready(function () {
 
     google.maps.event.addDomListener(window, 'load', initialise);
     updateLocation();
+    // console.log('loaded');
 });

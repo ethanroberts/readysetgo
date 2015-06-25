@@ -97,7 +97,7 @@ $(document).ready(function () {
         
         if(localStorage.routeNumber == 3){
             //tunnel gardens beehive
-            if(stopsRemaining < 3){
+            if(stopsRemaining < 2){
                 $("#tunnel").css({
                     display: "none"          
                 });
@@ -109,7 +109,7 @@ $(document).ready(function () {
                 $("#beehive").css({
                     display: "none"          
                 });
-            } else if(stopsRemaining < 8){
+            } else if(stopsRemaining < 4){
                 $("#tunnel").css({
                     display: "none"          
                 });
@@ -121,7 +121,7 @@ $(document).ready(function () {
                 $("#beehive").css({
                     display: "inline"          
                 });
-            } else if(stopsRemaining < 12){
+            } else if(stopsRemaining < 7){
                 $("#tunnel").css({
                     display: "none"          
                 });

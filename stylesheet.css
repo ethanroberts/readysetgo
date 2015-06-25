@@ -62,9 +62,10 @@ body {
     z-index: 1000;
 }
 
-.loader img{
-    position: absolute;
-    top: 40%;
-    left: 40%;
-    margin-right: -50%;    
+.loader .container {
+    text-align: center;
+    position: relative;
+    top: 50vh;
+    margin: 0 auto;
+    color: white;
 }

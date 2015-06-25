@@ -70,6 +70,18 @@ body {
     color: white;
 }
 
+#tunnel {
+    display: none;
+}
+
+#beehive {
+    display: none;
+}
+
+#gardens {
+    display: none;
+}
+
 .paddingFix {
     background-color: #a3a3a3;
     height: 20vh;

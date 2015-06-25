@@ -54,8 +54,8 @@ $(document).ready(function () {
             }, 'json');
         } else {
             // TODO graceful error handling if the user hasn't found a stop on teh find a stop page
-            alert('Please find a stop before riding along.');
-        }        
+            $('#ridealong-title').html('Please find a stop before riding along.');
+        }
 
         mapBounds();
     }
@@ -64,10 +64,60 @@ $(document).ready(function () {
      * Updates the stops remaining and landmarks
      */
     function updateLandmarks(stopsRemaining){
-        $('#stopsAway').html(stopsRemaining);
+        console.log('stopsRemaining' + stopsRemaining);
+        $('#ridealong-title').html('Get Off in <span id="stopsAway" class="titleEmphasis">' + stopsRemaining + '</span> Stops');
         
         if(localStorage.routeNumber == 3){
-            
+            //tunnel gardens beehive
+            if(stopsRemaining < 3){
+                $("#tunnel").css({
+                    display: "none"          
+                });
+                
+                $("#gardens").css({
+                    display: "none"          
+                });
+                
+                $("#beehive").css({
+                    display: "none"          
+                });
+            } else if(stopsRemaining < 8){
+                $("#tunnel").css({
+                    display: "none"          
+                });
+                
+                $("#gardens").css({
+                    display: "none"          
+                });
+                
+                $("#beehive").css({
+                    display: "inline"          
+                });
+            } else if(stopsRemaining < 12){
+                $("#tunnel").css({
+                    display: "none"          
+                });
+                
+                $("#gardens").css({
+                    display: "inline"          
+                });
+                
+                $("#beehive").css({
+                    display: "inline"          
+                });
+            } else if(stopsRemaining > 12){
+                $("#tunnel").css({
+                    display: "inline"          
+                });
+                
+                $("#gardens").css({
+                    display: "inline"          
+                });
+                
+                $("#beehive").css({
+                    display: "inline"          
+                });
+            }
         }
     }
     

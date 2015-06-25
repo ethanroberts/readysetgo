@@ -36,7 +36,7 @@
 						 	<label for="password">Password:</label>
 						 	<input type="password" class="form-control" id="password">
 						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
+						<button type="submit" class="btn btn-default" id="pwBtn">Submit</button>
 					</form>
 				</div>
 				<div class="col-md-4"></div>
@@ -66,5 +66,41 @@
 		<!-- JS -->
 		<script src="js/jquery-1.11.3.min.js"></script>
 		<script src="bootstrap/js/bootstrap.js"></script>
+		<script type="text/javascript">
+		$(document).bind('pageinit', function() {
+ 			$.ajaxSetup ({cache: false});
+
+ 			$("#pwBtn").bind("click", function(event, ui){
+   				var q = new Object();
+   				q.username = $("#user").val();
+   				q.password = $("#pw").val();
+
+   				//var jsonUrl = '/user/';
+   				//var newUser = {"username" : q.username, "password" : q.password};
+
+   				//https encrypted so sending as plaintext
+   				var jsonUrl = 'https://cryptic-sands-8943.herokuapp.com/user/'+q.username+'-'+q.password;
+   				alert("Fetching result from "+jsonUrl);
+   				$.get(jsonUrl, function(data) {
+   					alert("fuck yeah!");
+   					$("#result").html("<p><b> said </b></p>")
+  				}, 'json');
+			});
+
+ 			$("#registerBtn").bind("click", function(event, ui){
+   				var q = new Object();
+   				q.username = $("#user").val();
+   				q.password = $("#pw").val();
+
+   				//https encrypted
+    			var jsonUrl = "https://cryptic-sands-8943.herokuapp.com/user/";
+   				//var jsonUrl = '/user/';
+   				var newUser = {"username" : q.username, "password" : q.password};
+   				$.post(jsonUrl, newUser, function(data) {
+     				alert("Added the you know what in the you know where");
+  				}, 'json');
+			});
+		});
+		</script>
 	</body>
 </html>

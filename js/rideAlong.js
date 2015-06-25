@@ -1,5 +1,8 @@
+// TODO no geolocation fallback?
+
 var map;            // The map
 var watcher;        // Watches for changes in geolocation
+var busPath;        // The current bus path drawn on the map
 
 var markers = [];   // The markers which are currently drawn on the map
 var USER_INDEX = 0; // The position of the four markers which are drawn on the map
@@ -21,23 +24,30 @@ $(document).ready(function () {
      * Centres map on users location once the map is created
      */
     function usePosition(pos) {
+        console.log('usePosition');
         locations.userLat = pos.coords.latitude;
         locations.userLng = pos.coords.longitude;
         
         drawMarker(locations.userLat, locations.userLng, USER_INDEX);
         
+        
         if(typeof localStorage.destStopID !== 'undefined'){
             drawMarker(localStorage.destStopLat, localStorage.destStopLng, DEST_STOP_INDEX);
+            
             
             var numStopsData = {
                 destStopID: localStorage.destStopID,
                 destStopLat: localStorage.destStopLat,
-                destStopLng: localStorage.destStopLng
+                destStopLng: localStorage.destStopLng,
+                routeNumber: localStorage.routeNumber,
+                userLat:  locations.userLat,
+                userLng:  locations.userLng
             };
             
             var url = "https://ready-set-go.herokuapp.com/numberofstops/"+JSON.stringify(numStopsData);
             $.get(url, function (res) {
-                drawPath(res.routeNumber);
+                console.log(res);
+                drawPath(localStorage.routeNumber);
                 
                 updateLandmarks(res.numberOfStopsRemaining);
 
@@ -53,8 +63,12 @@ $(document).ready(function () {
     /**
      * Updates the stops remaining and landmarks
      */
-    function updateLandmarks(){
+    function updateLandmarks(stopsRemaining){
+        $('#stopsAway').html(stopsRemaining);
         
+        if(localStorage.routeNumber == 3){
+            
+        }
     }
     
     /** 
@@ -87,7 +101,6 @@ $(document).ready(function () {
         } else {
             alert("Browser/device doesn't support geolocation");
         }
-        addInputLocation();
     }
 
     /**

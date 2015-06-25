@@ -73,7 +73,7 @@ $(document).ready(function () {
             var url = "https://ready-set-go.herokuapp.com/search/"+JSON.stringify(locations);
             $.get(url, locations, function (res) {
                 hideLoader();
-                saveDestinationStop(res.destStop);
+                saveDestinationStop(res.destStop, res.routeNumber);
                 drawPath(res.routeNumber);
                 drawMarker(res.destStopLat, res.destStopLng, DEST_STOP_INDEX);
                 drawMarker(res.userStopLat, res.userStopLng, USER_STOP_INDEX);
@@ -103,10 +103,11 @@ $(document).ready(function () {
     /**
      * Saves the destination stop to local storage for use on the ride along page
      */
-    function saveDestinationStop(stopID){
+    function saveDestinationStop(stopID, routeNumber){
         localStorage.destStopID = stopID;
         localStorage.destStopLat = locations.destLat;
         localStorage.destStopLng = locations.destLng;
+        localStorage.routeNumber = routeNumber;
     }
     
     /**
@@ -242,16 +243,16 @@ $(document).ready(function () {
         
         switch (index) {
             case 0:
-                markerIcon = "../images/me.png";
+                markerIcon = "./images/me.png";
                 break;
             case 1:
-                markerIcon = "../images/Destination.png";
+                markerIcon = "./images/Destination.png";
                 break;
             case 2:
-                markerIcon = "../images/stopA.png";
+                markerIcon = "./images/stopA.png";
                 break;
             case 3:
-                markerIcon = "../images/stopB.png";
+                markerIcon = "./images/stopB.png";
                 break;
             default:
                 console.log("Incorrect index for marker icon: " + index);

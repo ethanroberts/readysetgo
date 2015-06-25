@@ -1,6 +1,5 @@
 // TODO Dynamic stop info how long until the next bus
 // TODO Map styling - remove locations only core roads
-// TODO remove route buttons once path drawing is working
 
 // Users most up to date location and their destination location
 var locations = {
@@ -46,7 +45,7 @@ $(document).ready(function () {
             drawPath(57);
             break;
         default:
-            alert("No button ID found for: " + event.target.id);
+            // alert("No button ID found for: " + event.target.id);
         }
     });
     
@@ -121,6 +120,12 @@ $(document).ready(function () {
             hideLoader();
             locations.userLat = result.A;
             locations.userLng = result.F;
+
+            localStorage.userLat = locations.userLat;
+            localStorage.userLng = locations.userLng;
+
+            console.log(localStorage.userLat);
+            console.log(localStorage.userLng);      
             
             drawMarker(locations.userLat, locations.userLng, USER_INDEX);            
             mapBounds();
@@ -169,9 +174,9 @@ $(document).ready(function () {
         };
         
         if (geoError) {
-            alert("Geolocation service failed: "  +errors[geoError.code]);
+            // alert("Geolocation service failed: "  +errors[geoError.code]);
         } else {
-            alert("Browser/device doesn't support geolocation");
+            // alert("Browser/device doesn't support geolocation");
         }
         addInputLocation();
     }
@@ -194,7 +199,7 @@ $(document).ready(function () {
      */
     function drawPath(routeNumber) {
         var url = "https://ready-set-go.herokuapp.com/path/" + routeNumber;
-        console.log('Drawing route #' + routeNumber);
+        // console.log('Drawing route #' + routeNumber);
         $.get(url, function (rawPath) {
 
             var pathData = [];
@@ -227,9 +232,9 @@ $(document).ready(function () {
      */
     function updateStopInfo(stopID, routeNumber) {
         var url = "https://ready-set-go.herokuapp.com/stopallinfo/"+stopID;
-        console.log(url);
+        // console.log(url);
         $.get(url, function (res) {
-            console.log(res[0]);
+            // console.log(res[0]);
             $('#stopInfoH1').html(res[0].stop_name);
             $('#stopInfoP').html(res[0].stop_desc + ' Catching bus number ' + routeNumber);
         }, 'json');
@@ -285,7 +290,7 @@ $(document).ready(function () {
         inputAddress = inputAddress + ', Wellington, New Zealand';
         geocoder.geocode( { 'address': inputAddress}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-                console.log(results);
+                // console.log(results);
                 callback( results[0].geometry.location);
             } else {
                 alert("Geocode was not successful for the following reason: " + status);

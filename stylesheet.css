@@ -87,3 +87,7 @@ body {
     height: 20vh;
     width: 100vw;
 }
+
+.100Width {
+    width: 100%;
+}
